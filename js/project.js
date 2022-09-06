@@ -13,27 +13,27 @@ class farmacia{
     }
 }
 //Instanciación de Objetos - PRODUCTOS DE FARMACIA
-const producto1 = new farmacia(1, "Bagó", "Tafirol", 250)
+const producto1 = new farmacia(0, "Bagó", "Tafirol", 250)
 
-const producto2 = new farmacia(2, "Bagó", "Ibupirac", 450)
+const producto2 = new farmacia(1, "Bagó", "Ibupirac", 450)
 
-const producto3 = new farmacia(3, "Bayer", "Bayaspirina", 455)
+const producto3 = new farmacia(2, "Bayer", "Bayaspirina", 455)
 
-const producto4 = new farmacia(4, "Roemmers", "Amoxidal", 950)
+const producto4 = new farmacia(3, "Roemmers", "Amoxidal", 950)
 
-const producto5 = new farmacia(5, "Cassara", "Betacort Plus", 700)
+const producto5 = new farmacia(4, "Cassara", "Betacort Plus", 700)
 
-const producto6 = new farmacia(6, "Ciccarelli", "Agua Oxigenada", 150)
+const producto6 = new farmacia(5, "Ciccarelli", "Agua Oxigenada", 150)
 
-const producto7 = new farmacia(7, "Ciccarelli", "Gazas", 280)
+const producto7 = new farmacia(6, "Ciccarelli", "Gazas", 280)
 
-const producto8 = new farmacia(8, "Medigen", "Salbutamol", 550)
+const producto8 = new farmacia(7, "Medigen", "Salbutamol", 550)
 
-const producto9 = new farmacia(9, "Porta", "Bi Alcohol 500ml", 700)
+const producto9 = new farmacia(8, "Porta", "Bi Alcohol 500ml", 700)
 
-const producto10 = new farmacia(10, "Bayer", "Merthiolate", 400)
+const producto10 = new farmacia(9, "Bayer", "Merthiolate", 400)
 
-const producto11 = new farmacia(11, "Elea", "Alernix Rapida Acción", 325)
+const producto11 = new farmacia(10, "Elea", "Alernix Rapida Acción", 325)
 
 //ARRAY CON LOS PRODUCTOS
 const stock = [producto1, producto2, producto3, producto4, producto5, producto6, producto7, producto8, producto9, producto10, producto11]
@@ -55,17 +55,17 @@ function nuevoProducto(array){
     let precioIngresado = prompt("Ingrese el precio de costo del producto")
     let productoCreado = new farmacia(stock.length+1, laboratorioIngresado, productoIngresado, precioIngresado)
     array.push(productoCreado)
-    alert(`El producto ha sido agregado exitosamente a nuestra base de datos.`)
+    alert(`El producto ha sido agregado exitosamente a nuestra base de datos. Revise nuestro catalogo para confirmar.`)
 }
 
 //3) Borrar un producto
 function borrarUnProducto(stock){
-    let posicion1 = prompt("Para eliminar un producto, seleccione la posición que ocupa el mismo en el stock, teniendo en cuenta que el primer producto, tiene posicion 0")
-    let posicion2 = prompt("Seleccione una segunda posición dentro del stock, que contenga al producto que desea eliminar, teniendo en cuenta que el primer producto, tiene posicion 0")
-    deleteProducto = confirm("Desea eliminar el producto seleccionado?")
+    let posicion1 = prompt("Para eliminar un producto, indique el ID del mismo en el stock")
+    let posicion2 = prompt("Indique el ID del producto siguiente para poder eliminar el primero. Si desea eliminar mas de uno, indique el ID del producto hasta donde quiera que sean eliminados.")
+    deleteProducto = confirm("Desea eliminar el/los productos seleccionados?")
         if (deleteProducto == true){
             stock.splice(posicion1, posicion2)
-            alert("El producto fue eliminado de la base de datos. Revise el menú para confirmar")
+            alert("El/los productos fueron eliminados de la base de datos. Revise el menú para confirmar")
         }else{
             alert("Seleccione otra opción del menú")
         }
@@ -73,12 +73,13 @@ function borrarUnProducto(stock){
 
 //4)funcion buscarPorProducto. Utilizo Find
 function buscarPorProducto(){
-    let buscarProducto = prompt("Ingrese el Producto requerido")
-    let productoEncontrado = stock.find((farmacia)=> farmacia.producto.toLowerCase() == buscarProducto.toLowerCase())
+    let buscarProducto = prompt("Ingrese el ID del Producto requerido")
+    let productoEncontrado = stock.find((farmacia)=> farmacia.id == buscarProducto)
     if(productoEncontrado == undefined){
         alert("No contamos con este producto en nuestro STOCK. Si desea cargarlo en la base seleccione la opción 2")
     } else{
-        console.log(`Encontramos su producto`)
+        alert("Los resultado de la busqueda se muestran en la consola")
+        console.log(`Coincidencias de Busqueda`)
         console.log(productoEncontrado)
     }
 }
@@ -89,6 +90,7 @@ function buscarPorLaboratorio(){
     if(filtrar.length == 0){
         alert(`No encontramos el laboratorio solicitado`)
     }else{
+        alert("Encontramos las siguientes coincidencias. Los resultado de la busqueda se muestran en la consola. Presione aceptar.")
         console.log(`Encontramos las siguientes coincidencias con los caracteres solicitados`)
         console.log(filtrar)
     }       
@@ -100,9 +102,8 @@ function programaFarmacia(){
                         1 - Ver Stock de Medicamentos
                         2 - Agregar un Medicamento al Stock 
                         3 - Eliminar producto del stock
-                        4 - Buscar por Producto:
-                        5 - Buscar Productos por Laboratorio:
-                        6 - Consultar Información y Precio Comercial
+                        4 - Buscar un producto con su ID:
+                        5 - Buscar productos por Laboratorio:                        
                         0 - Para salir
                         `))
     menu(opcion)
@@ -131,7 +132,7 @@ function menu(opcionSeleccionada){
             buscarPorLaboratorio()
       	break
         default: 
-      	alert(`La opción ingresada no es Correcta`)
+      	alert(`Ingrese la OPCIÓN correcta. Si desea salir, presione 0`)
     }
 }
 
