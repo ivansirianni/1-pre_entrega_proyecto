@@ -86,7 +86,7 @@ function buscarPorProducto(){
 //5)Buscar por laboratorio. utilizo filter
 function buscarPorLaboratorio(){
     let buscarLaboratorio = prompt(`Ingrese el Laboratorio y buscaremos sus productos relacionados`)
-    let filtrar = stock.filter((producto)=>producto.laboratorio.toLowerCase() == buscarLaboratorio.toLocaleLowerCase())
+    let filtrar = stock.filter((producto)=>producto.laboratorio.toLowerCase() == buscarLaboratorio.toLowerCase())
     if(filtrar.length == 0){
         alert(`No encontramos el laboratorio solicitado`)
     }else{
