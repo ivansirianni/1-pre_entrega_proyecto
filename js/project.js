@@ -12,6 +12,16 @@ class farmacia{
         console.log(`En nuestro sistema encontramos:\nID: ${this.id}\nLABORATORIO: ${this.laboratorio}\nPRODUCTO: ${this.producto}\nPRECIO DE COSTO: ${this.precio}`)
     }
 }
+class sucursales{
+    constructor(direccion, zona, telefono){        
+        this.direccion = direccion,
+        this.zona = zona,
+        this.telefono = telefono
+    }
+    verZona(){
+        console.log(`Visita nuestras sucursales:\nNOMBRE: Farmacia Ivo\nZONA: ${zona}\nDIRECCIÓN: ${direccion}\nTELEFONO: ${telefono}`)
+    }
+}
 //Instanciación de Objetos - PRODUCTOS DE FARMACIA
 const producto1 = new farmacia(0, "Bagó", "Tafirol", 250)
 
@@ -35,8 +45,21 @@ const producto10 = new farmacia(9, "Bayer", "Merthiolate", 400)
 
 const producto11 = new farmacia(10, "Elea", "Alernix Rapida Acción", 325)
 
+
+const sucursal1 = new sucursales("Bajada Puccio 1552", "NORTE", 4251236)
+
+const sucursal2 = new sucursales("Arijon 155 Bis", "SUR", 4125842)
+
+const sucursal3 = new sucursales("Entre Ríos 729", "CENTRO", 4568523)
+
+const sucursal4 = new sucursales("Pellegrini 6523", "OESTE", 4362145)
+
+const sucursal5 = new sucursales("Bv. Seguí 6411", "SUDOESTE", 4302562)
+
 //ARRAY CON LOS PRODUCTOS
 const stock = [producto1, producto2, producto3, producto4, producto5, producto6, producto7, producto8, producto9, producto10, producto11]
+
+const locales = [sucursal1, sucursal2, sucursal3, sucursal4, sucursal5]
 
 
 //1) funcion mostrarStock() utilizando el método forEach
@@ -95,6 +118,18 @@ function buscarPorLaboratorio(){
         console.log(filtrar)
     }       
 }
+//6) Información sobre las diferentes sucursales de la cadena de farmacias
+function buscarPorSucursal(){
+    let buscarSucursal = prompt("Para conocer la información requerida de las diferentes sucursales, ingrese la ZONA de referencia (NORTE, SUR, CENTRO, OESTE, SUDOESTE)")
+    let farmaciaEncontrada = locales.find((sucursales)=> sucursales.zona.toLowerCase() == buscarSucursal.toLowerCase())
+    if(farmaciaEncontrada == undefined){
+        alert("Ingrese una Zona valida")
+    } else{
+        alert("Los resultado de la busqueda se muestran en la consola")
+        console.log(`Coincidencias de Busqueda`)
+        console.log(farmaciaEncontrada)
+    }
+}
 
 //Sistema de farmacia. El farmaceutico puede consultar información de diferentes productos en el stock, si el mismo no se encuentra, lo puede sumar a la base. Tambien puede filtar de forma especifica por producto o filtar por laboratorios
 function programaFarmacia(){
@@ -103,7 +138,8 @@ function programaFarmacia(){
                         2 - Agregar un Medicamento al Stock 
                         3 - Eliminar producto del stock
                         4 - Buscar un producto con su ID:
-                        5 - Buscar productos por Laboratorio:                        
+                        5 - Buscar productos por Laboratorio:
+                        6 - Ver Información de Sucursales                        
                         0 - Para salir
                         `))
     menu(opcion)
@@ -131,8 +167,10 @@ function menu(opcionSeleccionada){
         case 5: 
             buscarPorLaboratorio()
       	break
+        case 6:
+            buscarPorSucursal()
         default: 
-      	alert(`Ingrese la OPCIÓN correcta. Si desea salir, presione 0`)
+      	alert(`Si desea salir, presione 0`)
     }
 }
 
